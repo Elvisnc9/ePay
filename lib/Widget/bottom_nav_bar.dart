@@ -69,7 +69,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
              color: AppColors.dark,
-           borderRadius: BorderRadius.circular(30)
+           borderRadius: BorderRadius.circular(10)
           ),
           child: Row(
           children: [
@@ -97,7 +97,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: Icon(
           icon,
           color:  Colors.white ,
-          size: 4.h,
+          size: 4.5.h,
         ),
       ),
       onPressed: () => _onItemTapped(index),

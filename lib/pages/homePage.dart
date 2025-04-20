@@ -403,6 +403,9 @@ class Lastest_Transactions extends StatelessWidget {
 
 
 
+
+
+
 class HorizontalListViewWithIndicator extends StatefulWidget {
   @override
   _HorizontalListViewWithIndicatorState createState() =>
@@ -453,7 +456,7 @@ class _HorizontalListViewWithIndicatorState
             itemCount: 3, // Number of items
             itemBuilder: (context, index) {
               return _buildPage(
-                'https://img.freepik.com/premium-psd/bank-services-instagram-posts_23-2150248578.jpg?w=826',
+                'https://img.freepik.com/free-vector/bank-finance-social-media-cover-template_23-2149730421.jpg?t=st=1745184016~exp=1745187616~hmac=e5fe5f0581f9703ae8a0545eb6582ca032d1566f117d057f65b4039d3320972e&w=826'
               );
             },
           ),
