@@ -42,6 +42,7 @@ dependencies:
   line_icons:
   cached_network_image:
   smooth_page_indicator: 
+  flutter_card_swiper:
 
 
 dev_dependencies:

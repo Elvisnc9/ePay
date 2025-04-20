@@ -89,15 +89,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget _buildCenterIcon(IconData icon, int index) {
     return IconButton(
       icon: Container(
-        padding: const EdgeInsets.all(2),
+        padding: const EdgeInsets.all(5),
         decoration:  BoxDecoration(
-       color:   Color.fromARGB(255, 27, 214, 89).withOpacity(0.8),
+       color:  Colors.white.withOpacity(0.2),
        shape:BoxShape.circle 
         ),
         child: Icon(
           icon,
-          color:  Colors.black ,
-          size: 40,
+          color:  Colors.white ,
+          size: 4.h,
         ),
       ),
       onPressed: () => _onItemTapped(index),
@@ -121,7 +121,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: Icon(
           icon,
           color: _selectedIndex == index 
-              ? Color.fromARGB(255, 27, 214, 89).withOpacity(0.8) 
+              ? Colors.white
               : Colors.white.withOpacity(0.8),
           size: 4.h,
         ),

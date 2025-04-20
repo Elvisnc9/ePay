@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
    return AnnotatedRegion<SystemUiOverlayStyle>(
   value: SystemUiOverlayStyle.light.copyWith(
-    statusBarColor: Colors.transparent, // ensures no black background
+    statusBarColor: Colors.transparent, 
   ),
   child: MaterialApp(
     debugShowCheckedModeBanner: false,

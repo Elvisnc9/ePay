@@ -17,11 +17,11 @@ final themeData = ThemeData(
           ),
           labelLarge:  GoogleFonts.sora(
             color: AppColors.light,
-            fontSize: 6.h,
+            fontSize: 5.4.h,
             fontWeight: FontWeight.w600
           ),
           titleMedium:  TextStyle(
-            fontSize: 2.h,
+            fontSize: 1.6.h,
             fontWeight: FontWeight.bold,
             color: AppColors.dark,
           ),
