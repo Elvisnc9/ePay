@@ -15,4 +15,6 @@ class AppColors{
   static const Color dark = Color(0xFF100C08);
   static const  Color light = Color(0xFFFFFFFF);
   static const Color green = Color.fromARGB(255, 217, 226, 221);
+
+  static var primary;
 }

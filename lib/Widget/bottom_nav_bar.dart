@@ -1,10 +1,11 @@
+import 'dart:ui';
+
 import 'package:epay/constant/color.dart';
 import 'package:epay/pages/cardPage.dart';
 import 'package:epay/pages/historyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:the_responsive_builder/the_responsive_builder.dart';
-
 import '../pages/homepage.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -13,6 +14,7 @@ class BottomNavBar extends StatefulWidget {
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
+
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
@@ -58,30 +60,37 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 children: _pages,
               ),
             ),
+             Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  padding: const EdgeInsets.symmetric( horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: AppColors.light.withOpacity(0.3),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildNavIcon(LineIcons.home, 0),
+                      _buildNavIcon(LineIcons.creditCard, 1),
+                      _buildCenterIcon(LineIcons.qrcode, 2),
+                      _buildNavIcon(LineIcons.barChartAlt, 3),
+                      _buildNavIcon(LineIcons.user, 4),
+           ],
+                  )
+                     ),
+         ),
+       ),
+     ),
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Container(
-          height: 7.h,
-          
-          margin: const EdgeInsets.symmetric(horizontal: 30),
-          decoration: BoxDecoration(
-             color: AppColors.dark,
-           borderRadius: BorderRadius.circular(10)
-          ),
-          child: Row(
-          children: [
-            _buildNavIcon(LineIcons.home, 0),
-            _buildNavIcon(LineIcons.creditCard, 1),
-            _buildCenterIcon(LineIcons.qrcode, 2),
-             _buildNavIcon(LineIcons.barChartAlt, 3),
-            _buildNavIcon(LineIcons.user, 4),
-          ],
-                    ),
-        ),
-      ),
+    
     );
   }
 
@@ -91,13 +100,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
       icon: Container(
         padding: const EdgeInsets.all(5),
         decoration:  BoxDecoration(
-       color:  Colors.white.withOpacity(0.2),
+       color:  Colors.black,
        shape:BoxShape.circle 
         ),
         child: Icon(
           icon,
           color:  Colors.white ,
-          size: 4.5.h,
+          size: _selectedIndex == index 
+              ? 5.h  : 4.h ,
         ),
       ),
       onPressed: () => _onItemTapped(index),
@@ -114,16 +124,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
         padding: EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: _selectedIndex == index 
-              ? Colors.white.withOpacity(0.2)
+              ? Colors.white.withOpacity(0.4)
               : Colors.transparent,
           shape: BoxShape.circle,
         ),
         child: Icon(
           icon,
           color: _selectedIndex == index 
-              ? Colors.white
-              : Colors.white.withOpacity(0.8),
-          size: 4.h,
+              ? Colors.black
+              : Colors.black,
+          size: _selectedIndex == index 
+          ? 4.5.h : 3.5.h,
         ),
       ),
       onPressed: () => _onItemTapped(index),
