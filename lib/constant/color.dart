@@ -7,14 +7,13 @@ class AppColors{
       0.0,
       1.0
     ],
-    end: Alignment(0.03,0.1),
     colors: [
-    Color.fromARGB(255, 244, 244, 244),
-    Color.fromARGB(255, 245, 244, 244)
+    Color(0XFF8B008B),
+    Color(0XFFFFD700)
   ]);
-  static const Color dark = Color(0xFF100C08);
-  static const  Color light = Color(0xFFFFFFFF);
-  static const Color green = Color.fromARGB(255, 217, 226, 221);
+  static const Color dark = Colors.black;
+  static const  Color light = Colors.white;
+ 
 
-  static var primary;
+
 }

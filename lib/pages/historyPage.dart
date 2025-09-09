@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:epay/Widget/chart.dart';
 import 'package:epay/constant/color.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +32,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 ) ,
               ),
 
-              SizedBox(height: 4.h),
-             
+              SizedBox(height: 4.h,),
+                
+
+                SizedBox(
+                  height: 40.h,
+                  child:BarHorizontal() )
 
 
             ],

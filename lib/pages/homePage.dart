@@ -20,177 +20,173 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: EdgeInsets.only(top: 7.h, left: 1.h, right: 1.h),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Header(theme: theme),
-
-            Row(
-              children: [
-                Text('Total balance', style: theme.textTheme.titleMedium),
-                SizedBox(
-                  width: 2.w,
-                ),
-                Text(
-                  _isBalanceVisible ? '202 688 7910' : '**** **** 791',
-                  style: theme.textTheme.titleMedium,
-                ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isBalanceVisible = !_isBalanceVisible;
-                    });
-                  },
-                  icon: _isBalanceVisible
-                      ? const Icon(Icons.visibility_off)
-                      : const Icon(Icons.visibility),
-                ),
-              ],
-            ),
-
-            //BALANCE
-            Text(
-              _isBalanceVisible ? '\$21,928.320' : '\$ ******',
-              style: theme.textTheme.labelLarge?.copyWith(
-                color: AppColors.dark,
-              ),
-            ),
-
-            SizedBox(
-              height: 1.h,
-            ),
-
-            //Send AND Recieve Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 7.h,
-                  width: 45.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.light.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(30),
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(top: 7.h, left: 1.h, right: 1.h),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Header(theme: theme),
+              Row(
+                children: [
+                  Text('Total balance', style: theme.textTheme.titleMedium),
+                  SizedBox(
+                    width: 2.w,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/arrow-1.svg',
-                        width: 15,
-                      ),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Text(
-                        'Recieve',
-                        style: theme.textTheme.titleMedium
+                  Text(
+                    _isBalanceVisible ? '202 688 7910' : '**** **** 791',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isBalanceVisible = !_isBalanceVisible;
+                      });
+                    },
+                    icon: _isBalanceVisible
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
+                  ),
+                ],
+              ),
+      
+              //BALANCE
+              Text(
+                _isBalanceVisible ? '\$21,928.320' : '\$ ******',
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: AppColors.dark,
+                ),
+              ),
+      
+              SizedBox(
+                height: 1.h,
+              ),
+      
+              //Send AND Recieve Buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ActionButton(theme: theme, icon: 'assets/icons/arrow-1.svg', text: 'Recieve',),
+                  ActionButton(theme: theme, icon: 'assets/icons/arrow-2.svg', text: 'Send',),
+
+
+                 
+                ],
+              ),
+      
+              SizedBox(
+                height: 2.h,
+              ),
+              //Last Recipents
+      
+              Row(
+                children: [
+                  Text('Last Recipients', style: theme.textTheme.titleMedium),
+                  const Spacer(),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'See all',
+                        style: theme.textTheme.labelSmall
                             ?.copyWith(color: AppColors.dark),
-                      ),
-                    ],
-                  ),
+                      ))
+                ],
+              ),
+      
+              //Last Recipents List
+      
+              SizedBox(
+                height: 15.h,
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: lastRecipents
+                      .map((recipent) => Recipients(
+                            name: recipent.name,
+                            image: recipent.image,
+                          ))
+                      .toList(),
                 ),
-                Container(
-                  height: 7.h,
-                  width: 45.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.light.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(30),
+              ),
+      
+              SizedBox(height: 22.h, child: Advert()),
+      
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Lastest Transactions',
+                    style: theme.textTheme.titleMedium,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/arrow-2.svg',
-                        width: 15,
-                      ),
-                      SizedBox(
-                        width: 4.w,
-                      ),
-                      Text(
-                        'Send',
-                        style: theme.textTheme.titleMedium
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'See more',
+                        style: theme.textTheme.labelSmall
                             ?.copyWith(color: AppColors.dark),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-
-            SizedBox(
-              height: 2.h,
-            ),
-            //Last Recipents
-
-            Row(
-              children: [
-                Text('Last Recipients', style: theme.textTheme.titleMedium),
-                const Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'See all',
-                      style: theme.textTheme.labelSmall
-                          ?.copyWith(color: AppColors.dark),
-                    ))
-              ],
-            ),
-
-            //Last Recipents List
-
-            SizedBox(
-              height: 15.h,
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: lastRecipents
-                    .map((recipent) => Recipients(
-                          name: recipent.name,
-                          image: recipent.image,
-                        ))
-                    .toList(),
+                      ))
+                ],
               ),
-            ),
-
-            SizedBox(height: 22.h, child: Advert()),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Lastest Transactions',
-                  style: theme.textTheme.titleMedium,
+      
+              //latest Transactions
+              SizedBox(
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  children: latest
+                      .map((transaction) => Lastest_Transactions(
+                            title: transaction.title,
+                            date: transaction.date,
+                            amount: transaction.amount,
+                          ))
+                      .toList(),
                 ),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'See more',
-                      style: theme.textTheme.labelSmall
-                          ?.copyWith(color: AppColors.dark),
-                    ))
-              ],
-            ),
-
-            //latest Transactions
-            SizedBox(
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                children: latest
-                    .map((transaction) => Lastest_Transactions(
-                          title: transaction.title,
-                          date: transaction.date,
-                          amount: transaction.amount,
-                        ))
-                    .toList(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class ActionButton extends StatelessWidget {
+  const ActionButton({
+    super.key,
+    required this.theme, required this.icon, required this.text,
+  });
+
+  final ThemeData theme;
+  final String icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 7.h,
+      width: 40.w,
+      decoration: BoxDecoration(
+        color: AppColors.light.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            icon,
+            width: 15,
+          ),
+          SizedBox(
+            width: 4.w,
+          ),
+          Text(
+            text,
+            style: theme.textTheme.titleMedium
+                ?.copyWith(color: AppColors.dark),
+          ),
+        ],
       ),
     );
   }

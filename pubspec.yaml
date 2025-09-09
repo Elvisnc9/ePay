@@ -45,7 +45,7 @@ dependencies:
   smooth_page_indicator: 
   flutter_card_swiper:
   community_charts_flutter:
-  syncfusion_flutter_charts: ^24.1.41
+  syncfusion_flutter_charts: 
 
 
 dev_dependencies:

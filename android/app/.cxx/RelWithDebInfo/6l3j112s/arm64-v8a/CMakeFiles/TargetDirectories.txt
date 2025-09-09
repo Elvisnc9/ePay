@@ -1,0 +1,2 @@
+C:/Users/Elviz/Elves app/epay/android/app/.cxx/RelWithDebInfo/6l3j112s/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Elviz/Elves app/epay/android/app/.cxx/RelWithDebInfo/6l3j112s/arm64-v8a/CMakeFiles/rebuild_cache.dir

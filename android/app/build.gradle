@@ -1,22 +1,23 @@
 plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
-    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.android.application' version '8.2.2'
+    id 'org.jetbrains.kotlin.android' version '1.9.20'
+    id 'dev.flutter.flutter-gradle-plugin'
 }
 
 android {
     namespace = "com.example.epay"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+
+    //noinspection GradleDependency
+    compileSdk = 35
+    ndkVersion = "29.0.13113456"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = "21"
     }
 
     defaultConfig {
