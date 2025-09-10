@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 class AppColors{
-  static  LinearGradient backgroundColor = const LinearGradient(
-    begin: Alignment.topCenter,
-    stops: [
-      0.0,
-      1.0
-    ],
-    colors: [
-    Color(0XFF8B008B),
-    Color(0XFFFFD700)
-  ]);
+  static  Gradient backgroundColor = const  RadialGradient(
+            center: Alignment.center,
+            radius: 0.4,
+            
+            colors: [
+             Color(0xFFFFA726),
+               Color(0xFFFF00FF), // Pink
+              // Purple
+            ],
+            stops: [ 0.6, 1.0],
+          );
   static const Color dark = Colors.black;
-  static const  Color light = Colors.white;
+  static const Color orange = Color(0xFFFFA726);
+  static const  Color light = Color.fromARGB(255, 224, 231, 232);
  
 
 

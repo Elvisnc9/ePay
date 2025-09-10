@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epay/Widget/advert.dart';
+import 'package:epay/Widget/edge_to_edge.dart';
 import 'package:epay/constant/color.dart';
 import 'package:epay/model/last_recipents.dart';
 import 'package:epay/model/transactions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:the_responsive_builder/the_responsive_builder.dart';
 
@@ -16,135 +18,172 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  bool _isBalanceVisible = true;
+final bool _isBalanceVisible = true;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(top: 7.h, left: 1.h, right: 1.h),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Header(theme: theme),
-              Row(
+    return EdgeToEdgeWrapperWidget(
+      child: Scaffold(
+        backgroundColor: AppColors.light,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only( left: 2.h, right: 2.h),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Total balance', style: theme.textTheme.titleMedium),
+                  
+             
+                  Row(
+                    children: [
+                      Image.asset('assets/icons/App-Logo.png', width: 12.w,),
+                      SizedBox(width: 2.w),
+                      Text('Pesoredee',
+                      style: GoogleFonts.poppins(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600
+                      ),
+                      ),
+                      Spacer(),
+
+                      CircleAvatar(
+                        backgroundColor: Colors.white70,
+                        radius: 20,
+                        child: Icon(Icons.dark_mode),
+                      )
+                    ],
+                  ),
+
+                   SizedBox(height: 2.h,),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Elvis\'s Card Balance',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey)),
+                      
+                      
+                      //BALANCE
+                      Padding(
+                        padding:  EdgeInsets.all(2.w),
+                        child: Center(
+                          child: Text(
+                            _isBalanceVisible ? '\$21,928.320' : '\$ ******',
+                            style: theme.textTheme.labelLarge?.copyWith(
+                              color: AppColors.dark, fontSize: 35
+                            ),
+                          ),
+                        ),
+                      ),
+
+
+                      Container(
+                        width: 160,
+                        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Money on hold ', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey)),
+                            Text('\$400',style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),)
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+          
                   SizedBox(
-                    width: 2.w,
+                    height: 1.h,
                   ),
-                  Text(
-                    _isBalanceVisible ? '202 688 7910' : '**** **** 791',
-                    style: theme.textTheme.titleMedium,
+          
+                  //Send AND Recieve Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ActionButton(theme: theme, icon: Icons.upcoming_outlined,  text: 'Recieve',),
+                      ActionButton(theme: theme, icon: Icons.move_down,  text: 'Send',),
+        
+        
+                     
+                    ],
                   ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isBalanceVisible = !_isBalanceVisible;
-                      });
-                    },
-                    icon: _isBalanceVisible
-                        ? const Icon(Icons.visibility_off)
-                        : const Icon(Icons.visibility),
+          
+                  SizedBox(
+                    height: 2.h,
                   ),
-                ],
-              ),
-      
-              //BALANCE
-              Text(
-                _isBalanceVisible ? '\$21,928.320' : '\$ ******',
-                style: theme.textTheme.labelLarge?.copyWith(
-                  color: AppColors.dark,
-                ),
-              ),
-      
-              SizedBox(
-                height: 1.h,
-              ),
-      
-              //Send AND Recieve Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ActionButton(theme: theme, icon: 'assets/icons/arrow-1.svg', text: 'Recieve',),
-                  ActionButton(theme: theme, icon: 'assets/icons/arrow-2.svg', text: 'Send',),
-
-
-                 
-                ],
-              ),
-      
-              SizedBox(
-                height: 2.h,
-              ),
-              //Last Recipents
-      
-              Row(
-                children: [
-                  Text('Last Recipients', style: theme.textTheme.titleMedium),
-                  const Spacer(),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'See all',
-                        style: theme.textTheme.labelSmall
-                            ?.copyWith(color: AppColors.dark),
-                      ))
-                ],
-              ),
-      
-              //Last Recipents List
-      
-              SizedBox(
-                height: 15.h,
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: lastRecipents
-                      .map((recipent) => Recipients(
-                            name: recipent.name,
-                            image: recipent.image,
+                  //Last Recipents
+          
+                  Row(
+                    children: [
+                      Text('Last Recipients', style: theme.textTheme.titleMedium),
+                      const Spacer(),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'See all',
+                            style: theme.textTheme.labelSmall
+                                ?.copyWith(color: AppColors.dark),
                           ))
-                      .toList(),
-                ),
-              ),
-      
-              SizedBox(height: 22.h, child: Advert()),
-      
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Lastest Transactions',
-                    style: theme.textTheme.titleMedium,
+                    ],
                   ),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'See more',
-                        style: theme.textTheme.labelSmall
-                            ?.copyWith(color: AppColors.dark),
-                      ))
+          
+                  //Last Recipents List
+          
+                  SizedBox(
+                    height: 15.h,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: lastRecipents
+                          .map((recipent) => Recipients(
+                                name: recipent.name,
+                                image: recipent.image,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+          
+                  SizedBox(height: 22.h, child: Advert()),
+          
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Lastest Transactions',
+                        style: theme.textTheme.titleMedium,
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'See more',
+                            style: theme.textTheme.labelSmall
+                                ?.copyWith(color: AppColors.dark),
+                          ))
+                    ],
+                  ),
+          
+                  //latest Transactions
+                  SizedBox(
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: latest
+                          .map((transaction) => Lastest_Transactions(
+                                title: transaction.title,
+                                date: transaction.date,
+                                amount: transaction.amount,
+                              ))
+                          .toList(),
+                    ),
+                  ),
                 ],
               ),
-      
-              //latest Transactions
-              SizedBox(
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  children: latest
-                      .map((transaction) => Lastest_Transactions(
-                            title: transaction.title,
-                            date: transaction.date,
-                            amount: transaction.amount,
-                          ))
-                      .toList(),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -159,28 +198,39 @@ class ActionButton extends StatelessWidget {
   });
 
   final ThemeData theme;
-  final String icon;
+  final IconData icon;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       height: 7.h,
       width: 40.w,
       decoration: BoxDecoration(
-        color: AppColors.light.withOpacity(0.8),
+    color: Colors.white70,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            icon,
-            width: 15,
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+               color: AppColors.orange
+              ),
+              child: Icon(
+                icon,
+                size: 20,
+                weight: 2,
+              ),
+            ),
           ),
-          SizedBox(
-            width: 4.w,
-          ),
+         
           Text(
             text,
             style: theme.textTheme.titleMedium

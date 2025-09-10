@@ -18,7 +18,7 @@ final themeData = ThemeData(
             fontSize: 5.4.h,
             fontWeight: FontWeight.w600
           ),
-          titleMedium:  TextStyle(
+          titleMedium:  GoogleFonts.poppins(
             fontSize: 1.6.h,
             fontWeight: FontWeight.bold,
             color: AppColors.dark,
