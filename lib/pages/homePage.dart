@@ -5,7 +5,6 @@ import 'package:epay/constant/color.dart';
 import 'package:epay/model/last_recipents.dart';
 import 'package:epay/model/transactions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:the_responsive_builder/the_responsive_builder.dart';
@@ -116,69 +115,94 @@ final bool _isBalanceVisible = true;
                   SizedBox(
                     height: 2.h,
                   ),
-                  //Last Recipents
-          
-                  Row(
-                    children: [
-                      Text('Last Recipients', style: theme.textTheme.titleMedium),
-                      const Spacer(),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'See all',
-                            style: theme.textTheme.labelSmall
-                                ?.copyWith(color: AppColors.dark),
-                          ))
-                    ],
-                  ),
-          
-                  //Last Recipents List
-          
-                  SizedBox(
-                    height: 15.h,
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      children: lastRecipents
-                          .map((recipent) => Recipients(
-                                name: recipent.name,
-                                image: recipent.image,
-                              ))
-                          .toList(),
+
+ Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text('Last Recipients', style: theme.textTheme.titleMedium),
+                            const Spacer(),
+                            TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'See all',
+                                  style: theme.textTheme.labelSmall
+                                      ?.copyWith(color: AppColors.dark),
+                                ))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 7.h,
+                          child: ListView(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            children: lastRecipents
+                                .map((recipent) => Recipients(
+                                      image: recipent.image,
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
           
-                  SizedBox(height: 22.h, child: Advert()),
+
+                   SizedBox(height: 22.h, child: Advert()),
+                  //Last Recipents
           
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Lastest Transactions',
-                        style: theme.textTheme.titleMedium,
-                      ),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'See more',
-                            style: theme.textTheme.labelSmall
-                                ?.copyWith(color: AppColors.dark),
-                          ))
-                    ],
-                  ),
+                 
+
+          SizedBox(height: 1.h,),
+                
           
-                  //latest Transactions
-                  SizedBox(
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: latest
-                          .map((transaction) => Lastest_Transactions(
-                                title: transaction.title,
-                                date: transaction.date,
-                                amount: transaction.amount,
-                              ))
-                          .toList(),
+                  Container(
+                    padding: EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Lastest Transactions',
+                              style: theme.textTheme.titleMedium,
+                            ),
+                            TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'See more',
+                                  style: theme.textTheme.labelSmall
+                                      ?.copyWith(color: AppColors.dark),
+                                ))
+                          ],
+                        ),
+                                  
+                        //latest Transactions
+                        SizedBox(
+                          child: ListView(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            children: latest
+                                .map((transaction) => Lastest_Transactions(
+                                      title: transaction.title,
+                                      date: transaction.date,
+                                      amount: transaction.amount,
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -322,9 +346,9 @@ class Header extends StatelessWidget {
 }
 
 class Recipients extends StatelessWidget {
-  final String name;
+
   final String image;
-  const Recipients({super.key, required this.name, required this.image});
+  const Recipients({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -333,13 +357,13 @@ class Recipients extends StatelessWidget {
       child: Column(
         children: [
           CircleAvatar(
-            radius: 30,
+            radius: 20,
             backgroundColor: Colors.grey[200],
             child: ClipOval(
               child: CachedNetworkImage(
                 imageUrl: image,
-                width: 80,
-                height: 80,
+                width: 40,
+                height: 40,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Center(
                   child: SizedBox(
@@ -352,16 +376,7 @@ class Recipients extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 1.h,
-          ),
-          Text(
-            name,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.dark,
-                  fontSize: 1.5.h,
-                ),
-          ),
+        
         ],
       ),
     );
