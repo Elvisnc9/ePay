@@ -4,129 +4,153 @@ import 'package:epay/Widget/edge_to_edge.dart';
 import 'package:epay/constant/color.dart';
 import 'package:epay/model/last_recipents.dart';
 import 'package:epay/model/transactions.dart';
+import 'package:epay/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:the_responsive_builder/the_responsive_builder.dart';
 
-class Homepage extends StatefulWidget {
+class Homepage extends ConsumerWidget {
   const Homepage({super.key});
 
-  @override
-  State<Homepage> createState() => _HomepageState();
-}
+  final bool _isBalanceVisible = true;
 
-class _HomepageState extends State<Homepage> {
-final bool _isBalanceVisible = true;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
     final theme = Theme.of(context);
     return EdgeToEdgeWrapperWidget(
       child: Scaffold(
-        backgroundColor: AppColors.light,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.only( left: 2.h, right: 2.h),
+            padding: EdgeInsets.only(left: 2.h, right: 2.h),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
-             
                   Row(
                     children: [
-                      Image.asset('assets/icons/App-Logo.png', width: 12.w,),
-                      SizedBox(width: 2.w),
-                      Text('Pesoredee',
-                      style: GoogleFonts.poppins(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600
+                      Image.asset(
+                        'assets/icons/App-Logo.png',
+                        width: 12.w,
                       ),
+                      SizedBox(width: 2.w),
+                      Text(
+                        'Pesoredee',
+                        style: GoogleFonts.poppins(
+                            fontSize: 20.sp, fontWeight: FontWeight.w600),
                       ),
                       Spacer(),
-
                       CircleAvatar(
                         backgroundColor: Colors.white70,
                         radius: 20,
-                        child: Icon(Icons.dark_mode),
-                      )
+                        child: IconButton(
+                         icon : Icon(
+                        themeMode == ThemeMode.light
+                        ? Icons.nightlight_round
+                        :Icons.wb_sunny,
+                          ),
+
+                          onPressed: (){
+                            ref.read(themeProvider.notifier).state =
+                             themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light; 
+                          },
+                      ))
                     ],
                   ),
 
-                   SizedBox(height: 2.h,),
+                  SizedBox(
+                    height: 2.h,
+                  ),
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text('Elvis\'s Card Balance',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey)),
-                      
-                      
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(color: Colors.grey)),
+
                       //BALANCE
                       Padding(
-                        padding:  EdgeInsets.all(2.w),
+                        padding: EdgeInsets.all(2.w),
                         child: Center(
                           child: Text(
                             _isBalanceVisible ? '\$21,928.320' : '\$ ******',
-                            style: theme.textTheme.labelLarge?.copyWith(
-                              color: AppColors.dark, fontSize: 35
-                            ),
+                            style: theme.textTheme.labelLarge
+                                ?.copyWith(color: AppColors.dark, fontSize: 35),
                           ),
                         ),
                       ),
 
-
                       Container(
                         width: 160,
-                        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 2.w, vertical: 0.5.h),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white
-                        ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Money on hold ', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey)),
-                            Text('\$400',style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold),)
+                            Text('Money on hold ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(color: Colors.grey)),
+                            Text(
+                              '\$400',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelMedium
+                                  ?.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                            )
                           ],
                         ),
                       )
                     ],
                   ),
-          
+
                   SizedBox(
                     height: 1.h,
                   ),
-          
+
                   //Send AND Recieve Buttons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ActionButton(theme: theme, icon: Icons.upcoming_outlined,  text: 'Recieve',),
-                      ActionButton(theme: theme, icon: Icons.move_down,  text: 'Send',),
-        
-        
-                     
+                      ActionButton(
+                        theme: theme,
+                        icon: Icons.upcoming_outlined,
+                        text: 'Recieve',
+                      ),
+                      ActionButton(
+                        theme: theme,
+                        icon: Icons.move_down,
+                        text: 'Send',
+                      ),
                     ],
                   ),
-          
+
                   SizedBox(
                     height: 2.h,
                   ),
 
- Container(
+                  Container(
                     padding: EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(20)
-                    ),
+                        color:  AppColors.primary,
+                        borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       children: [
                         Row(
                           children: [
-                            Text('Last Recipients', style: theme.textTheme.titleMedium),
+                            Text('Last Recipients',
+                                style: theme.textTheme.titleMedium),
                             const Spacer(),
                             TextButton(
                                 onPressed: () {},
@@ -152,23 +176,19 @@ final bool _isBalanceVisible = true;
                       ],
                     ),
                   ),
-          
 
-                   SizedBox(height: 22.h, child: Advert()),
+                  SizedBox(height: 22.h, child: Advert()),
                   //Last Recipents
-          
-                 
 
-          SizedBox(height: 1.h,),
-                
-          
+                  SizedBox(
+                    height: 1.h,
+                  ),
+
                   Container(
                     padding: EdgeInsets.all(4.0),
                     decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-
+                        color: Colors.white70,
+                        borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       children: [
                         Row(
@@ -187,7 +207,7 @@ final bool _isBalanceVisible = true;
                                 ))
                           ],
                         ),
-                                  
+
                         //latest Transactions
                         SizedBox(
                           child: ListView(
@@ -218,7 +238,9 @@ final bool _isBalanceVisible = true;
 class ActionButton extends StatelessWidget {
   const ActionButton({
     super.key,
-    required this.theme, required this.icon, required this.text,
+    required this.theme,
+    required this.icon,
+    required this.text,
   });
 
   final ThemeData theme;
@@ -228,11 +250,10 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       height: 7.h,
       width: 40.w,
       decoration: BoxDecoration(
-    color: Colors.white70,
+        color: Colors.white70,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -244,9 +265,7 @@ class ActionButton extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-               color: AppColors.orange
-              ),
+                  shape: BoxShape.circle, color: AppColors.orange),
               child: Icon(
                 icon,
                 size: 20,
@@ -254,11 +273,9 @@ class ActionButton extends StatelessWidget {
               ),
             ),
           ),
-         
           Text(
             text,
-            style: theme.textTheme.titleMedium
-                ?.copyWith(color: AppColors.dark),
+            style: theme.textTheme.titleMedium?.copyWith(color: AppColors.dark),
           ),
         ],
       ),
@@ -346,7 +363,6 @@ class Header extends StatelessWidget {
 }
 
 class Recipients extends StatelessWidget {
-
   final String image;
   const Recipients({super.key, required this.image});
 
@@ -376,7 +392,6 @@ class Recipients extends StatelessWidget {
               ),
             ),
           ),
-        
         ],
       ),
     );

@@ -13,6 +13,7 @@ class AppColors{
             stops: [ 0.6, 1.0],
           );
   static const Color dark = Colors.black;
+  static const Color primary = Colors.white70;
   static const Color orange = Color(0xFFFFA726);
   static const  Color light = Color.fromARGB(255, 224, 231, 232);
  

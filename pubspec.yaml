@@ -46,6 +46,7 @@ dependencies:
   flutter_card_swiper:
   community_charts_flutter:
   syncfusion_flutter_charts: 
+  flutter_riverpod: 
 
 
 dev_dependencies:
